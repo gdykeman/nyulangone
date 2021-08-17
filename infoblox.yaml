@@ -1,0 +1,10 @@
+---
+- name: Grab available ip
+  hosts: nios
+  connection: local
+  gather_facts: no
+
+  tasks: # commenting all of these that are straight from the docs
+    - name: return next available network for network-container "{{ target_network }}"
+      ansible.builtin.set_fact:
+        next_ip: "{{ lookup('nios_next_ip', target_network, provider=nios_provider) }}"
