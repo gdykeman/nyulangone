@@ -1,6 +1,6 @@
 ---
 - name: Grab available ip
-  hosts: nios
+  hosts: all
   connection: local
   gather_facts: no
 
