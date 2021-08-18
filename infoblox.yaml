@@ -5,6 +5,15 @@
   gather_facts: no
 
   tasks: # commenting all of these that are straight from the docs
+    - name: configure an IPv4 host record
+      nios_host_record:
+        name: "{{ host_record }}"
+        ipv4addrs:
+          - ipv4addr:
+              "{{ lookup('nios_next_ip', target_network, provider=nios_provider)[0] }}"
+        state: present
+        provider: "{{ nios_provider }}"
+
     - name: return next available network for network-container "{{ target_network }}"
       ansible.builtin.set_fact:
         next_ip: "{{ lookup('nios_next_ip', target_network, provider=nios_provider) }}"
